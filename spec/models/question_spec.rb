@@ -1,16 +1,17 @@
 require 'rails_helper'
 
 RSpec.describe Question, type: :model do
-  let(:question) { Question.create! title: "New Question Title", body: "New Question Body", resolved:false }#had resolved:false
+    let(:question) { Question.new(title: 'New Question Title', body: 'New Question Body', resolved: false) } # had resolved:false
 
-  describe "attributes" do
-    it "it has a title body and a booleian attributes" do
-    expect(question).to have_attributes(title: "New Question Title", body: "New Question Body", resolved:false )
-  end
-  end
+    it 'responds to title' do
+        expect(question).to respond_to(:title)
+    end
 
+    it 'responds to body' do
+        expect(qusetion).to respond_to(:body)
+    end
 
-
-
-
+    it 'responds to resolved' do
+        expect(question).to respond_to(:resolved)
+    end
 end
