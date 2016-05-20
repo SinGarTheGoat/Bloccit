@@ -1,11 +1,19 @@
 <h1>All Posts</h1>
 # #12
-<% @posts.each do |post| %>
+
+<%counter=1%>
+<% @posts.each do |post|  %>
+  <!--<h3>this is a dumb post</h3> --->
 <div class="media">
    <div class="media-body">
      <h4 class="media-heading">
+       <%if counter ==1||counter % 5==0%>
+        <h3>SPAM<h3>
+         <%else%>
        <%= link_to post.title, post %>
+       <% end %>
      </h4>
    </div>
  </div>
+ <%counter+=1 %>
 <% end %>
