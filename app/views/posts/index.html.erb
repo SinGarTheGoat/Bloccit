@@ -2,13 +2,13 @@
 # #12
 
 <%counter=1%>
-<% @posts.each do |post|  %>
+<% @posts.each do |post| counter %>
   <!--<h3>this is a dumb post</h3> --->
 <div class="media">
    <div class="media-body">
      <h4 class="media-heading">
-       <%if counter ==1||counter % 5==0%>
-        <h3>SPAM<h3>
+   <%if counter ==1||counter % 5==0%>
+        <a href="http://www.spam.com/">SPAM</a>
          <%else%>
        <%= link_to post.title, post %>
        <% end %>
