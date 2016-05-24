@@ -4,7 +4,6 @@ class AdvertisementsController < ApplicationController
   end
 
   def show
-    #unsure about this line
     @advertisement = Advertisement.find(params[:id])
   end
 
