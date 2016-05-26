@@ -27,4 +27,9 @@ module RandomData
     letters.shuffle!
     letters[0,rand(3..8)].join
   end
+#I added this to make a new random munber
+  def self.random_num
+    rand(1..999)
+  end
+
 end

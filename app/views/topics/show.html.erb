@@ -24,6 +24,22 @@
    </div>
    <div class="col-md-4">
      <!--41-->
-     <%= link_to "New Post", new_topic_post_path(@topic), class: 'btn btn-success'
+     <%= link_to "New Post", new_topic_post_path(@topic), class: 'btn btn-success' %>
    </div>
  </div>
+ <!--My Code-->
+ <div class="row">
+   <div class="col-md-8">
+
+     <% @topic.sponsoredposts.each do |spost| %>
+       <div class="media">
+         <div class="media-body">
+           <h4 class="media-heading">
+             <!--39 --->
+          <%= link_to spost.title, topic_sponsored_postspath(@topic, spost)%>
+           </h4>
+         </div>
+       </div>
+     <% end %>
+     </div>
+   </div>
