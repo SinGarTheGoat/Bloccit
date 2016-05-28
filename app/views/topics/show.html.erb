@@ -28,15 +28,16 @@
    </div>
  </div>
  <!--My Code-->
+ <h1>sponsored_posts</h1>
  <div class="row">
    <div class="col-md-8">
 
-     <% @topic.sponsoredposts.each do |spost| %>
+     <% @topic.sponsored_posts.each do |spost| %>
        <div class="media">
          <div class="media-body">
            <h4 class="media-heading">
              <!--39 --->
-          <%= link_to spost.title, topic_sponsored_postspath(@topic, spost)%>
+          <%= link_to spost.title, topic_sponsored_posts_path(@topic, spost)%>
            </h4>
          </div>
        </div>
