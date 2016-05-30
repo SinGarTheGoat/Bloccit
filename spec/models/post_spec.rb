@@ -9,6 +9,9 @@ RSpec.describe Post, type: :model do
 
     let(:topic) { Topic.create!(name: name, description: description) }
 
+   it { is_expected.to have_many(:labelings) }
+   it { is_expected.to have_many(:labels).through(:labelings) }
+
   # #1
   let(:user) { User.create!(name: "Bloccit User", email: "user@bloccit.com", password: "helloworld") }
 # #2
