@@ -14,6 +14,7 @@
              <!--39 --->
           <%= link_to post.title, topic_post_path(@topic, post)%>
            </h4>
+
            <!-- 40 -->
            <small>
               submitted <%= time_ago_in_words(post.created_at) %> ago by <%= post.user.name %> <br>
@@ -23,7 +24,7 @@
        </div>
      <% end %>
    </div>
-    <% if current_user %>
+    <% if current_user && !current_user.role == "moderator" %>
    <div class="col-md-4">
      <!--41-->
      <%= link_to "New Post", new_topic_post_path(@topic), class: 'btn btn-success' %>

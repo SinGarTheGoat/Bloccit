@@ -20,5 +20,5 @@ class User < ActiveRecord::Base
 
      enum role: [:member, :moderator, :admin]
 
-
+d
 end
