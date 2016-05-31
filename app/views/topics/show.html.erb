@@ -12,7 +12,10 @@
      </p>
      <!-- my code-->
      <div class="row">
+         <%= render partial: 'comments/form', locals: { resource: @topic, comments: @comments } %>
+
         <%= render partial: "comments/comment", locals: { comments: @topic.comments } %>
+
      </div>
 
 
