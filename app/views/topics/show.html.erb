@@ -10,6 +10,10 @@
        <br />
        <%= @topic.description %>
      </p>
+     <!-- my code-->
+     <div class="row">
+        <%= render partial: "comments/comment", locals: { comments: @topic.comments } %>
+     </div>
 
 
      <% @topic.posts.each do |post| %>

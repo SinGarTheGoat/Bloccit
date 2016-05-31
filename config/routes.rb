@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     resources :topics do
         # #34
         resources :posts, except: [:index]
+        resources :comments, only: [:create, :destroy]
     end
 
     resources :posts, only: [] do
