@@ -13,6 +13,8 @@ class FavoriteMailer < ApplicationMailer
 
    # #19
        mail(to: user.email, subject: "New comment on #{post.title}")
+       #is this how I add another e-mail
+       mail(to: example@email.com, subject: "New comment on #{post.title}" )
      end
 
 end
