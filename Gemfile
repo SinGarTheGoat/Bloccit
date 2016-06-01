@@ -32,3 +32,6 @@ end
 gem 'bootstrap-sass'
 # Used for encrypting User passwords
 gem 'bcrypt'
+
+#figaro, used to automate e-mails to user
+ gem 'figaro', '1.0'

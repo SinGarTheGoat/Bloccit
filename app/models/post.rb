@@ -10,6 +10,7 @@ class Post < ActiveRecord::Base
      validates :body, length: { minimum: 20 }, presence: true
      validates :topic, presence: true
      validates :user, presence: true
+     has_many :favorites, dependent: :destroy
 
    def up_votes
  # #9
