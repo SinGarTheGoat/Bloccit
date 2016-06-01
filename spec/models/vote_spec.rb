@@ -4,7 +4,7 @@ RSpec.describe Vote, type: :model do
 
    let(:topic) { create(:topic) }
    let(:user) { create(:user) }
-   let(:post) { create(:post) }
+   let(:post) { create(:post, user: user) }
 
   let(:vote) { Vote.create!(value: 1, post: post, user: user) }
 

@@ -14,7 +14,7 @@ class FavoriteMailer < ApplicationMailer
    # #19
        mail(to: user.email, subject: "New comment on #{post.title}")
        #is this how I add another e-mail
-       mail(to: example@email.com, subject: "New comment on #{post.title}" )
+      # mail(to: example@email.com, subject: "New comment on #{post.title}" )
      end
      def new_post(post)
        headers["Message-ID"] = "<post/#{post.id}@your-app-name.example>"
