@@ -12,6 +12,7 @@ class Post < ActiveRecord::Base
      validates :user, presence: true
      has_many :favorites, dependent: :destroy
      after_create :create_favorite
+     
 
    def up_votes
  # #9
