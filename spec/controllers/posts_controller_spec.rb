@@ -2,213 +2,205 @@ require 'rails_helper'
 
 include SessionsHelper
 
-
 RSpec.describe PostsController, type: :controller do
   let(:my_topic) { create(:topic) }
   let(:my_user) { create(:user) }
   let(:other_user) { create(:user) }
   let(:my_post) { create(:post, topic: my_topic, user: my_user) }
 
-
-
   # #5
-    context "guest user" do
-  # #6
-      describe "GET show" do
-        it "returns http success" do
-          get :show, topic_id: my_topic.id, id: my_post.id
-          expect(response).to have_http_status(:success)
-        end
-
-        it "renders the #show view" do
-          get :show, topic_id: my_topic.id, id: my_post.id
-          expect(response).to render_template :show
-        end
-
-        it "assigns my_post to @post" do
-          get :show, topic_id: my_topic.id, id: my_post.id
-          expect(assigns(:post)).to eq(my_post)
-        end
+  context 'guest user' do
+    # #6
+    describe 'GET show' do
+      it 'returns http success' do
+        get :show, topic_id: my_topic.id, id: my_post.id
+        expect(response).to have_http_status(:success)
       end
 
-  # #7
-      describe "GET new" do
-        it "returns http redirect" do
-          get :new, topic_id: my_topic.id
-  # #8
-          expect(response).to redirect_to(new_session_path)
-        end
+      it 'renders the #show view' do
+        get :show, topic_id: my_topic.id, id: my_post.id
+        expect(response).to render_template :show
       end
 
-      describe "POST create" do
-        it "returns http redirect" do
-          post :create, topic_id: my_topic.id, post: {title: RandomData.random_sentence, body: RandomData.random_paragraph}
-          expect(response).to redirect_to(new_session_path)
-        end
-      end
-
-      describe "GET edit" do
-        it "returns http redirect" do
-          get :edit, topic_id: my_topic.id, id: my_post.id
-          expect(response).to redirect_to(new_session_path)
-        end
-      end
-
-      describe "PUT update" do
-        it "returns http redirect" do
-          new_title = RandomData.random_sentence
-          new_body = RandomData.random_paragraph
-
-          put :update, topic_id: my_topic.id, id: my_post.id, post: {title: new_title, body: new_body}
-          expect(response).to redirect_to(new_session_path)
-        end
-      end
-
-      describe "DELETE destroy" do
-        it "returns http redirect" do
-          delete :destroy, topic_id: my_topic.id, id: my_post.id
-          expect(response).to have_http_status(:redirect)
-        end
+      it 'assigns my_post to @post' do
+        get :show, topic_id: my_topic.id, id: my_post.id
+        expect(assigns(:post)).to eq(my_post)
       end
     end
 
-    context "signed-in user" do
-       before do
-         create_session(my_user)
-       end
+    # #7
+    describe 'GET new' do
+      it 'returns http redirect' do
+        get :new, topic_id: my_topic.id
+        # #8
+        expect(response).to redirect_to(new_session_path)
+      end
+    end
 
+    describe 'POST create' do
+      it 'returns http redirect' do
+        post :create, topic_id: my_topic.id, post: { title: RandomData.random_sentence, body: RandomData.random_paragraph }
+        expect(response).to redirect_to(new_session_path)
+      end
+    end
 
+    describe 'GET edit' do
+      it 'returns http redirect' do
+        get :edit, topic_id: my_topic.id, id: my_post.id
+        expect(response).to redirect_to(new_session_path)
+      end
+    end
+
+    describe 'PUT update' do
+      it 'returns http redirect' do
+        new_title = RandomData.random_sentence
+        new_body = RandomData.random_paragraph
+
+        put :update, topic_id: my_topic.id, id: my_post.id, post: { title: new_title, body: new_body }
+        expect(response).to redirect_to(new_session_path)
+      end
+    end
+
+    describe 'DELETE destroy' do
+      it 'returns http redirect' do
+        delete :destroy, topic_id: my_topic.id, id: my_post.id
+        expect(response).to have_http_status(:redirect)
+      end
+    end
+  end
+
+  context 'signed-in user' do
+    before do
+      create_session(my_user)
+    end
 
     describe 'GET show' do
-        it 'returns http success' do
-            # #16
+      it 'returns http success' do
+        # #16
         get :show, topic_id: my_topic.id, id: my_post.id
-            expect(response).to have_http_status(:success)
-        end
-        it 'renders the #show view' do
-            # #17
-            get :show, topic_id: my_topic.id, id: my_post.id
-            expect(response).to render_template :show
-        end
+        expect(response).to have_http_status(:success)
+      end
+      it 'renders the #show view' do
+        # #17
+        get :show, topic_id: my_topic.id, id: my_post.id
+        expect(response).to render_template :show
+      end
 
-        it 'assigns my_post to @post' do
-           get :show, topic_id: my_topic.id, id: my_post.id
-            # #18
-            expect(assigns(:post)).to eq(my_post)
-        end
+      it 'assigns my_post to @post' do
+        get :show, topic_id: my_topic.id, id: my_post.id
+        # #18
+        expect(assigns(:post)).to eq(my_post)
+      end
     end
 
     # #1
     describe 'GET new' do
-        it 'returns http success' do
-            get :new, topic_id: my_topic.id
-            expect(response).to have_http_status(:success)
-        end
+      it 'returns http success' do
+        get :new, topic_id: my_topic.id
+        expect(response).to have_http_status(:success)
+      end
 
-        # #2
-        it 'renders the #new view' do
-          get :new, topic_id: my_topic.id
-            expect(response).to render_template :new
-        end
+      # #2
+      it 'renders the #new view' do
+        get :new, topic_id: my_topic.id
+        expect(response).to render_template :new
+      end
 
-        # #3
-        it 'instantiates @post' do
-          get :new, topic_id: my_topic.id
+      # #3
+      it 'instantiates @post' do
+        get :new, topic_id: my_topic.id
 
-            expect(assigns(:post)).not_to be_nil
-        end
+        expect(assigns(:post)).not_to be_nil
+      end
     end
 
     describe 'POST create' do
+      it 'increases the number of Post by 1' do
+        # #21
+        expect { post :create, topic_id: my_topic.id, post: { title: RandomData.random_sentence, body: RandomData.random_paragraph } }.to change(Post, :count).by(1)
+      end
 
-        it 'increases the number of Post by 1' do
-          # #21
-       expect{post :create, topic_id: my_topic.id, post: {title: RandomData.random_sentence, body: RandomData.random_paragraph}}.to change(Post,:count).by(1)
+      # #22
+      it 'assigns the new post to @post' do
+        post :create, topic_id: my_topic.id, post: { title: RandomData.random_sentence, body: RandomData.random_paragraph }
+        expect(assigns(:post)).to eq Post.last
+      end
 
-        end
-
-        # #22
-        it 'assigns the new post to @post' do
- post :create, topic_id: my_topic.id, post: {title: RandomData.random_sentence, body: RandomData.random_paragraph}
-            expect(assigns(:post)).to eq Post.last
-        end
-
-        # #6
-        it 'redirects to the new post' do
-          # #23
-      post :create, topic_id: my_topic.id, post: {title: RandomData.random_sentence, body: RandomData.random_paragraph}
-# #24
-      expect(response).to redirect_to [my_topic, Post.last]
-        end
+      # #6
+      it 'redirects to the new post' do
+        # #23
+        post :create, topic_id: my_topic.id, post: { title: RandomData.random_sentence, body: RandomData.random_paragraph }
+        # #24
+        expect(response).to redirect_to [my_topic, Post.last]
+      end
     end
 
     describe 'GET edit' do
-        it 'returns http success' do
-# #25
-     get :edit, topic_id: my_topic.id, id: my_post.id
-        end
+      it 'returns http success' do
+        # #25
+        get :edit, topic_id: my_topic.id, id: my_post.id
+      end
 
-        it 'renders the #edit view' do
-          # #26
-          get :edit, topic_id: my_topic.id, id: my_post.id
-            expect(response).to render_template :edit
-        end
+      it 'renders the #edit view' do
+        # #26
+        get :edit, topic_id: my_topic.id, id: my_post.id
+        expect(response).to render_template :edit
+      end
 
-        # #2
-        it 'assigns post to be updated to @post' do
-# #27
-     get :edit, topic_id: my_topic.id, id: my_post.id
+      # #2
+      it 'assigns post to be updated to @post' do
+        # #27
+        get :edit, topic_id: my_topic.id, id: my_post.id
 
-            post_instance = assigns(:post)
+        post_instance = assigns(:post)
 
-            expect(post_instance.id).to eq my_post.id
-            expect(post_instance.title).to eq my_post.title
-            expect(post_instance.body).to eq my_post.body
-        end
+        expect(post_instance.id).to eq my_post.id
+        expect(post_instance.title).to eq my_post.title
+        expect(post_instance.body).to eq my_post.body
+      end
     end
 
     describe 'PUT update' do
-        it 'updates post with expected attributes' do
-            new_title = RandomData.random_sentence
-            new_body = RandomData.random_paragraph
+      it 'updates post with expected attributes' do
+        new_title = RandomData.random_sentence
+        new_body = RandomData.random_paragraph
 
-            # #28
-        put :update, topic_id: my_topic.id, id: my_post.id, post: {title: new_title, body: new_body}
+        # #28
+        put :update, topic_id: my_topic.id, id: my_post.id, post: { title: new_title, body: new_body }
 
-            updated_post = assigns(:post)
-            expect(updated_post.id).to eq my_post.id
-            # #29
-      put :update, topic_id: my_topic.id, id: my_post.id, post: {title: new_title, body: new_body}
-            # #30
-      expect(response).to redirect_to [my_topic, my_post]
+        updated_post = assigns(:post)
+        expect(updated_post.id).to eq my_post.id
+        # #29
+        put :update, topic_id: my_topic.id, id: my_post.id, post: { title: new_title, body: new_body }
+        # #30
+        expect(response).to redirect_to [my_topic, my_post]
+      end
 
-        end
+      it 'redirects to the updated post' do
+        new_title = RandomData.random_sentence
+        new_body = RandomData.random_paragraph
 
-        it 'redirects to the updated post' do
-            new_title = RandomData.random_sentence
-            new_body = RandomData.random_paragraph
-
-            # #29
-      put :update, topic_id: my_topic.id, id: my_post.id, post: {title: new_title, body: new_body}
-            # #30
-      expect(response).to redirect_to [my_topic, my_post]
-        end
+        # #29
+        put :update, topic_id: my_topic.id, id: my_post.id, post: { title: new_title, body: new_body }
+        # #30
+        expect(response).to redirect_to [my_topic, my_post]
+      end
     end
 
     describe 'DELETE destroy' do
-        it 'deletes the post' do
-          delete :destroy, topic_id: my_topic.id, id: my_post.id
+      it 'deletes the post' do
+        delete :destroy, topic_id: my_topic.id, id: my_post.id
 
-            count = Post.where(id: my_post.id).size
-            expect(count).to eq 0
-        end
+        count = Post.where(id: my_post.id).size
+        expect(count).to eq 0
+      end
 
-        it "redirects to topic show" do
-# #32
-      delete :destroy, topic_id: my_topic.id, id: my_post.id
-# #33
-      expect(response).to redirect_to my_topic
-        end
+      it 'redirects to topic show' do
+        # #32
+        delete :destroy, topic_id: my_topic.id, id: my_post.id
+        # #33
+        expect(response).to redirect_to my_topic
+      end
     end
   end
 end
