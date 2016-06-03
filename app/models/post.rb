@@ -12,7 +12,7 @@ class Post < ActiveRecord::Base
      validates :topic, presence: true
      validates :user, presence: true
      has_many :favorites, dependent: :destroy
-     after_create :create_favorite
+    
 
    def up_votes
  # #9
@@ -33,14 +33,4 @@ class Post < ActiveRecord::Base
        new_rank = points + age_in_days
        update_attribute(:rank, new_rank)
      end
-
-
-def create_favorite
-  Favorite.create( post: self, user: self.user)
-  FavoriteMailer.new_post(self).deliver_now
-end
-
-
-
-
 end

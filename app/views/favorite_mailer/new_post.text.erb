@@ -1,8 +1,8 @@
 You are following "<%= @post.title %>"
  <%= "=" * (@post.title.length + 12) %>
 
- By: <%= @comment.user.name %>
+ By: <%= @post.user.name %>
 
- <%= @comment.body %>
+ <%= @post.body %>
 
- Visit online at: <%= topic_post_url(@post.topic, @post, anchor: "comment-#{@comment.id}") %>
+ Visit online at: <%= topic_post_url(@post.topic, @post, anchor: "post-#{@post.id}") %>

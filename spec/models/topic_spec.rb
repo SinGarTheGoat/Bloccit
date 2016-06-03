@@ -4,7 +4,6 @@ RSpec.describe Topic, type: :model do
 
    let(:public) { true }
     let(:topic) { create(:topic) }
-   it { is_expected.to have_many(:comments) }
    it { is_expected.to have_many(:posts) }
    # #9
    it { is_expected.to have_many(:labelings) }

@@ -1,5 +1,5 @@
 require 'rails_helper'
-  include SessionsHelper
+include SessionsHelper
 
 
 
