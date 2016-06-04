@@ -23,7 +23,19 @@
 
 
 <h2>Posts</h2>
+<% unless @user.has_posts? %>
+  <%= "#{@user.name} has not submitted any posts yet." %>
+<% end %>
 <%= render @user.posts %>
 
 <h2>Comments</h2>
+<% unless @user.has_comments? %>
+  <%= "#{@user.name} has not submitted any comments yet." %>
+<% end %>
 <%= render @user.comments %>
+
+<h2>Favorites</h2>
+<% @user.favorites.each do |favorite| %>
+  <%= image_tag(avatar_url(favorite.post.user)) %>
+  <%= render partial: "posts/post", locals: { post: favorite.post } %>
+<% end %>
