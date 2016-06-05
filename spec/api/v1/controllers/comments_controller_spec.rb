@@ -1,7 +1,7 @@
 require 'rails_helper'
 include RandomData
 
-RSpec.describe Api::V1::CommentController, type: :controller do
+RSpec.describe Api::V1::CommentsController, type: :controller do
     let(:my_user) { create(:user) }
     let(:my_topic) { create(:topic) }
     let(:my_post) { create(:post, topic: my_topic, user: my_user) }
@@ -21,7 +21,7 @@ RSpec.describe Api::V1::CommentController, type: :controller do
         end
         it 'GET show returns a comment' do
             get show, id: my_comment.id
-            response_hash = JSON.parse response body
+            response_hash = JSON.parse response.body
             expect(response_hash['id']).to eq my_comment.id
             expect(response_hash['body']).to eq my_comment.body
         end
@@ -42,7 +42,7 @@ RSpec.describe Api::V1::CommentController, type: :controller do
         end
         it 'GET show returns a comment' do
             get show, id: my_comment.id
-            response_hash = JSON.parse response body
+            response_hash = JSON.parse response.body
             expect(response_hash['id']).to eq my_comment.id
             expect(response_hash['body']).to eq my_comment.body
         end
