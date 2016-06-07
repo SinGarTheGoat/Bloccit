@@ -20,7 +20,7 @@ RSpec.describe Api::V1::CommentsController, type: :controller do
             expect(response).to have_http_status(:success)
         end
         it 'GET show returns a comment' do
-            get show, id: my_comment.id
+            get :show, id: my_comment.id
             response_hash = JSON.parse response.body
             expect(response_hash['id']).to eq my_comment.id
             expect(response_hash['body']).to eq my_comment.body
@@ -41,7 +41,7 @@ RSpec.describe Api::V1::CommentsController, type: :controller do
             expect(response).to have_http_status(:success)
         end
         it 'GET show returns a comment' do
-            get show, id: my_comment.id
+            get :show, id: my_comment.id
             response_hash = JSON.parse response.body
             expect(response_hash['id']).to eq my_comment.id
             expect(response_hash['body']).to eq my_comment.body
