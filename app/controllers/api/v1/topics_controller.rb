@@ -19,7 +19,7 @@ class Api::V1::TopicsController < Api::V1::BaseController
         if topic.update_attributes(topic_params)
             render json: topic, status: 200
         else
-            render json: { error: 'Topic update failed', status: 400 }, status: 400
+            render json: { error: 'Topic update failed', status: 403 }, status: 403
         end
       end
 

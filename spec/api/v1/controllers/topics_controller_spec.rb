@@ -47,28 +47,29 @@ RSpec.describe Api::V1::TopicsController, type: :controller do
       expect(response).to have_http_status(:success)
     end
   end
-  it "PUT update returns http forbidden" do
+  it "PUT update returns http unauthorized" do
        put :update, id: my_topic.id, topic: {name: "Topic Name", description: "Topic Description"}
-       expect(response).to have_http_status(403)
+       expect(response).to have_http_status(401)
      end
 
-     it "POST create returns http forbidden" do
+     it "POST create returns http unauthorized" do
        post :create, topic: {name: "Topic Name", description: "Topic Description"}
-       expect(response).to have_http_status(403)
+       expect(response).to have_http_status(401)
      end
 
-     it "DELETE destroy returns http forbidden" do
+     it "DELETE destroy returns http unauthorized" do
        delete :destroy, id: my_topic.id
-       expect(response).to have_http_status(403)
+       expect(response).to have_http_status(401)
      end
      # #15
   context "authenticated and authorized users" do
 # #16
     before do
-      my_user.admin!
-      controller.request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Token.encode_credentials(my_user.auth_token)
-      @new_topic = build(:topic)
-    end
+    my_user.admin!
+    controller.request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Token.encode_credentials(my_user.auth_token)
+    @new_topic = build(:topic)
+end
+
 
     describe "PUT update" do
       before { put :update, id: my_topic.id, topic: {name: @new_topic.name, description: @new_topic.description} }

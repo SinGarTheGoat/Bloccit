@@ -28,6 +28,17 @@ RSpec.describe Api::V1::UsersController, type: :controller do
       expect(response).to have_http_status(401)
     end
 
+    it "PUT update returns http unauthorized" do
+      new_user = build(:user)
+      put :update, id: my_user.id, user: { name: new_user.name, email: new_user.email, password: new_user.password }
+      expect(response).to have_http_status(401)
+    end
+
+    it "POST create returns http unauthorized" do
+      new_user = build(:user)
+      post :create, user: { name: new_user.name, email: new_user.email, password: new_user.password }
+      expect(response).to have_http_status(401)
+    end
   end
 
 # #13
@@ -71,17 +82,7 @@ RSpec.describe Api::V1::UsersController, type: :controller do
       end
     end
     # #2
-         it "PUT update returns http forbidden" do
-           new_user = build(:user)
-           put :update, id: my_user.id, user: { name: new_user.name, email: new_user.email, password: new_user.password }
-           expect(response).to have_http_status(403)
-         end
 
-         it "POST create returns http forbidden" do
-           new_user = build(:user)
-           post :create, user: { name: new_user.name, email: new_user.email, password: new_user.password }
-           expect(response).to have_http_status(403)
-         end
 # #16
     describe "GET show" do
       before { get :show, id: my_user.id }
